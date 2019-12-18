@@ -1,7 +1,21 @@
-const CronJob = require('cron').CronJob;
+const CronJob = require("cron").CronJob;
 
-const job = new CronJob('* * * * * *', function() {
-	const d = new Date();
-	console.log('Every Tenth Minute:', d);
+async function abc(index) {
+  index++;
+  console.log("index: ", index);
+}
+
+const job = new CronJob("* * * * * *", async () => {
+  const d = new Date();
+  await abc(10);
+  console.log("Every Tenth Minute:", d);
 });
-job.start();
+
+for (index = 0; index < 10; index++) {
+  job.start();
+
+  
+}
+setTimeout(function() {
+    job.stop();
+  }, 1000);
